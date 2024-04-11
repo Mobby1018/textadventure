@@ -1,5 +1,6 @@
 import items, world
 import random
+import pickle
 
 class Player():
     def __init__(self):
@@ -57,3 +58,9 @@ class Player():
         available_moves = tile.adjacent_moves()
         r = random.randint(0, len(available_moves) - 1)
         self.do_action(available_moves[r])
+
+    def save_and_exit(self):
+        pickle.dump(self, open( "saved_player.p", "wb" ))
+        pickle.dump(world._world, open( "saved_world.p", "wb"))
+        print("Game saved!")
+        exit()

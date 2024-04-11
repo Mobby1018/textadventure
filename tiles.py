@@ -1,5 +1,5 @@
 import items, enemies, actions, world
-import random
+
 class MapTile:
     def __init__(self, x, y):
         self.x = x
@@ -8,11 +8,11 @@ class MapTile:
     def intro_text(self):
         raise NotImplementedError()
 
-    def modify_player(self, player):
+    def modify_player(self, the_player):
         raise NotImplementedError()
     
     def adjacent_moves(self):
-        moves[]
+        moves = []
         if world.tile_exists(self.x + 1, self.y):
             moves.append(actions.MoveEast())
         if world.tile_exists(self.x - 1, self.y):
@@ -26,18 +26,21 @@ class MapTile:
     def available_actions(self):
         moves = self.adjacent_moves()
         moves.append(actions.ViewInventory())
+        moves.append(actions.SaveAndExit())
         return moves
 
 class StartingRoom(MapTile):
     def intro_text(self):
         return """
         You snap back into consciousness. You're in a white room. The memories from before come in flashes. 
-        You remember sitting on the toilet, excited to add on to the crust. You finish and go to stand up, and BAM! The toilet tank lid pops off and hits you in the head. 
-        You notice that you can move a little more free than usually. You reach down and realize... YOUR CRUST! IT'S GONE! That toilet... it must be one of those so called "Skibidi Toilets".
+        You remember sitting on the toilet, excited to add on to the crust. You finish and go to stand up, and BAM!
+        The toilet tank lid pops off and hits you in the head. 
+        You notice that you can move a little more free than usually. You reach down and realize... 
+        YOUR CRUST! IT'S GONE! That toilet... it must be one of those so called "Skibidi Toilets".
         That damn toilet. I bet it cleaned my crust!
         """
 
-    def modify_player(self, player):
+    def modify_player(self, the_player):
         pass
 
 class LootRoom(MapTile):
@@ -45,11 +48,11 @@ class LootRoom(MapTile):
         self.item = item
         super().__init__(x, y)
 
-    def add_loot(self, player):
-        player.inventory.append(self.item)
+    def add_loot(self, the_player):
+        the_player.inventory.append(self.item)
 
-    def modify_player(self, player):
-        self.add_loot(player)
+    def modify_player(self, the_player):
+        self.add_loot(the_player)
 
 class EnemyRoom(MapTile):
     def __init__(self, x, y, enemy):
@@ -73,7 +76,7 @@ class EmptyPath(MapTile):
         A White hallway with nothing to see
         """
 
-    def modify_player(self, player):
+    def modify_player(self, the_player):
         pass
 
 class ToiletRoom(EnemyRoom):
@@ -132,7 +135,7 @@ class BioToiletRoom(EnemyRoom):
             """
 class UrinalRoom(EnemyRoom):
     def __init__(self, x, y):
-        super().__init__(x, y, enemies.SkibidiUrnial())
+        super().__init__(x, y, enemies.SkibidiUrinal())
 
     def intro_text(self):
         if self.enemy.is_alive():
@@ -158,7 +161,7 @@ class BathRoom(EnemyRoom):
             """
 class AbnormalRoom(EnemyRoom):
     def __init__(self, x, y):
-        super().__init__(x, y, enemies.AbnormalSkibidyToilet())
+        super().__init__(x, y, enemies.AbnormalToilet())
 
     def intro_text(self):
         if self.enemy.is_alive():
@@ -186,7 +189,7 @@ class BossToiletRoom(EnemyRoom):
 
 class FindTPRoom(LootRoom):
     def __init__(self, x, y):
-        super().__init__(x, y, items.ToiletPaper())
+        super().__init__(x, y, items.ToiletPaper(10))
 
     def intro_text(self):
         return """
@@ -224,3 +227,11 @@ class FindPlungerRoom(LootRoom):
         return """
         You found a Plunger!
         """
+class LeaveSkibidi(MapTile):
+    def intro_text(self):
+        return """
+        You have beaten all of the Skibidi's.
+        Now you can return to crusting!
+        """
+    def modify_player(self, player):
+        player.victory = True

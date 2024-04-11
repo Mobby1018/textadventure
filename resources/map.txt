@@ -1,0 +1,44 @@
+												
+												
+												
+												
+												
+							BossToiletRoom					
+					EmptyPath	FindTPRoom	EmptyPath	FindPlungerRoom	EmptyPath			
+					AbnormalRoom				SmallToiletRoom			
+					BioToiletRoom		EmptyPath		BioToiletRoom			
+					BigToiletRoom	EmptyPath	EmptyPath	EmptyPath	BigToiletRoom			
+							BigToiletRoom					
+							EmptyPath					
+							ToiletRoom					
+				BossToiletRoom			ToiletRoom					
+				FindPlungerRoom			EmptyPath					
+				FindTPRoom			FindTPRoom					
+			EmptyPath	EmptyPath	EmptyPath	EmptyPath	BathRoom	EmptyPath	EmptyPath	EmptyPath	EmptyPath	
+							FindTPRoom					
+							FindTPRoom					
+					AbnormalRoom	BioToiletRoom	EmptyPath	UrinalRoom	EmptyPath			
+					EmptyPath		EmptyPath		BigToiletRoom			
+					EmptyPath		ToiletRoom		FindToiletBrushRoom			
+					EmptyPath		SmallToiletRoom		FindTPRoom			
+					FindTPRoom		FindTPRoom		FindTPRoom			
+					EmptyPath	FindTPRoom	EmptyPath	BigToiletRoom	FindTPRoom			
+							FindTPRoom					
+							SmallToiletRoom					
+							FindCardboardTubeRoom					
+						FindTPRoom	StartingRoom	FindTPRoom	FindTPRoom	EmptyPath		
+							EmptyPath					
+							EmptyPath					
+							SmallToiletRoom					
+							ToiletRoom					
+							UrinalRoom					
+							BathRoom					
+							BigToiletRoom					
+							BioToiletRoom					
+							AbnormalRoom					
+							EmptyPath					
+							EmptyPath					
+							FindTPRoom					
+							BossToiletRoom					
+							LeaveSkibidi					
+												
