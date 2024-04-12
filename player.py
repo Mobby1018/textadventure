@@ -1,7 +1,14 @@
 import items, world
 import random
 import pickle
+import time
+from os import system, name
 
+def clear():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
 class Player():
     def __init__(self):
         self.inventory = [items.ToiletPaper(15)]
@@ -47,7 +54,7 @@ class Player():
         if not enemy.is_alive():
             print("You killed {}!".format(enemy.name))
         else:
-            print("() HP is ().".format(enemy.name, enemy.hp))
+            print("{} HP is {}.".format(enemy.name, enemy.hp))
 
     def do_action(self, action, **kwargs):
         action_method = getattr(self, action.method.__name__)
@@ -63,4 +70,6 @@ class Player():
         pickle.dump(self, open( "saved_player.p", "wb" ))
         pickle.dump(world._world, open( "saved_world.p", "wb"))
         print("Game saved!")
+        time.sleep(1)
+        clear()
         exit()

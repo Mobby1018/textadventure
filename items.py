@@ -50,3 +50,32 @@ class Plunger(Weapon):
                          description="What's thought to be the ultimate weapon, it can be used to force the Skibidi Toilets inside their bowl.",
                          value=20,
                          damage=50)
+
+class Potion(Item):
+    def __init(self, name, description, value, damage):
+        self.damage = damage
+        super().__init__(name, description, value)
+
+    def __str__(self):
+        return "{}\n====\n{}\nValue: {}\nDamage: {}".format(self.name, self.description, self.value, self.damage)
+
+class SmallHealthPotion(Potion):
+    def __init__(self):
+        super().__init__(name="Small Health Potion",
+                         description="A small potion, it seems to be made of toilet water? It has a strange dark color to it.",
+                         value=10,
+                         damage=15)
+
+class LargeHealthPotion(Potion):
+    def __init__(self):
+        super().__init__(name="Large Health Potion",
+                         description="A large potion, it seems to be made of toilet water? IT has a strange dark color to it, but there is a large \"log\" floating in it.",
+                         value=25,
+                         damage=40)
+
+class MysteryPotion(Potion):
+    def __init__(self):
+        super().__init__(name="Mystery Potion",
+                         description="This potion has some green swirls within the dark color. I wander what would happen if you drank it?",
+                         value=1,
+                         damage=100)

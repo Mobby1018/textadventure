@@ -1,7 +1,9 @@
 import world
-from player import Player
+from player import *
 from pathlib import Path
 import pickle
+from os import system, name
+import time
 
 def play(saved_world=None, saved_player=None):
     if saved_world and saved_player:
@@ -13,6 +15,7 @@ def play(saved_world=None, saved_player=None):
     game_loop(player)
 
 def game_loop(player):
+    clear()
     room = world.tile_exists(player.location_x, player.location_y)
     print(room.intro_text())
     while player.is_alive() and not player.victory:
@@ -28,6 +31,8 @@ def game_loop(player):
                 if action_input == action.hotkey:
                     player.do_action(action, **action.kwargs)
                     break
+        time.sleep(2)
+        clear()
 def check_for_save():
     if Path("saved_player.p").is_file() and Path("saved_world.p").is_file():
         saved_world = pickle.load(open("saved_world.p", "rb"))
