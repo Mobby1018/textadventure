@@ -17,11 +17,11 @@ class SmallSkibidiToilet(Enemy):
 
 class BigSkibidiToilet(Enemy):
     def __init__(self):
-        super().__init__(name="Big Skibidi Toilet", hp=15, damage=8)
+        super().__init__(name="Big Skibidi Toilet", hp=15, damage=7)
 
 class BioEngineeredToilet(Enemy):
     def __init__(self):
-        super().__init__(name="Bio-Engineered Skibidi Toilet", hp=20, damage=12)
+        super().__init__(name="Bio-Engineered Skibidi Toilet", hp=20, damage=10)
 
 class SkibidiUrinal(Enemy):
     def __init__(self):
@@ -31,10 +31,18 @@ class SkibidiBathtub(Enemy):
     def __init__(self):
         super().__init__(name="Skibidi Bathtub", hp=12, damage=5)
 
-class BossToilet(Enemy):
+class FirstBossToilet(Enemy):
     def __init__(self):
         super().__init__(name="Boss Toilet", hp=50, damage=20)
 
+class SecondBossToilet(Enemy):
+    def __init__(self):
+        super().__init__(name="Boss Toilet", hp=75, damage=25)
+
+class ThirdBossToilet(Enemy):
+    def __init__(self):
+        super().__init__(name="Boss Toilet", hp=200, damage=40)
+    
 class AbnormalToilet(Enemy):
     def __init__(self):
         super().__init__(name="Abnormal Toilet", hp=25, damage=15)

@@ -11,7 +11,7 @@ def clear():
         _ = system('clear')
 class Player():
     def __init__(self):
-        self.inventory = [items.ToiletPaper(15)]
+        self.inventory = [items.ToiletPaper(15),items.Fist()]
         self.hp = 100
         self.location_x, self.location_y = world.starting_position
         self.victory = False

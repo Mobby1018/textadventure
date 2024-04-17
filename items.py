@@ -12,7 +12,7 @@ class ToiletPaper(Item):
     def __init__(self, amt):
         self.amt = amt
         super().__init__(name="Toilet Paper",
-                         description="A single square of {} toilet paper.".format(str(self.amt)),
+                         description="{} sheets of toilet paper.".format(str(self.amt)),
                          value=self.amt)
 
 class Weapon(Item):
@@ -23,6 +23,12 @@ class Weapon(Item):
     def __str__(self):
         return "{}\n=====\n{}\nValue: {}\nDamage: {}".format(self.name, self.description, self.value, self.damage)
 
+class Fist(Weapon):
+    def __init__(self):
+        super().__init__(name="Fist",
+                         description="Literally just your fist.",
+                         value=0,
+                         damage=1)
 class CardboardTube(Weapon):
     def __init__(self):
         super().__init__(name="Cardboard Tube",
@@ -49,7 +55,7 @@ class Plunger(Weapon):
         super().__init__(name="Plunger",
                          description="What's thought to be the ultimate weapon, it can be used to force the Skibidi Toilets inside their bowl.",
                          value=20,
-                         damage=50)
+                         damage=100)
 
 class Potion(Item):
     def __init(self, name, description, value, damage):

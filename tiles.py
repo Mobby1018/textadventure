@@ -1,5 +1,7 @@
 import items, enemies, actions, world
 
+
+
 class MapTile:
     def __init__(self, x, y):
         self.x = x
@@ -32,12 +34,7 @@ class MapTile:
 class StartingRoom(MapTile):
     def intro_text(self):
         return """
-        You snap back into consciousness. You're in a white room. The memories from before come in flashes. 
-        You remember sitting on the toilet, excited to add on to the crust. You finish and go to stand up, and BAM!
-        The toilet tank lid pops off and hits you in the head. 
-        You notice that you can move a little more free than usually. You reach down and realize... 
-        YOUR CRUST! IT'S GONE! That toilet... it must be one of those so called "Skibidi Toilets".
-        That damn toilet. I bet it cleaned my crust!
+        Hmm looks like this is where you started.
         """
 
     def modify_player(self, the_player):
@@ -172,12 +169,11 @@ class AbnormalRoom(EnemyRoom):
             return """
             The shattered remains of an Abnormal Skibidi Toilet can be seen in the center of the room.
             """
-class BossToiletRoom(EnemyRoom):
+class FirstBossToiletRoom(EnemyRoom):
     def __init__(self, x, y):
-        super().__init__(x, y, enemies.BossToilet())
-
+        super().__init__(x, y, enemies.FirstBossToilet()) 
     def intro_text(self):
-        if self.enemy.is_alive():
+        if self.enemy.is_alive():      
             return """
             *BOOM*
             *BOOM*
@@ -186,7 +182,43 @@ class BossToiletRoom(EnemyRoom):
             A GIANT SKIBIDI TOILET CRASHES THROUGH THE ROOF!
             IS THIS A BOSS???!??!??!?!
             """
-
+        else:
+            return """
+            The remnents of a Skibidi Boss can be seen.
+            """
+class SecondBossToiletRoom(EnemyRoom):
+    def __init__(self, x, y):
+        super().__init__(x, y, enemies.SecondBossToilet())
+    def intro_text(self):
+        if self.enemy.is_alive():
+            return """
+            *BOOM*
+            *BOOM*
+            *BOOM*
+            *CRASH*
+            ANOTHER BOSS TOILET ROOM!!!!
+            """
+        else:
+            return """
+            the remnents of a Skibidi Boss can be seen.
+            """
+class ThirdBossToiletRoom(EnemyRoom):
+    def __init__(self, x, y):
+        super().__init__(x, y, enemies.ThirdBossToilet())
+    def intro_text(self):
+        if self.enemy.is_alive():
+            return """
+            *BOOM*
+            *BOOM*
+            *BOOM*
+            *CRASH*
+            IS THIS THE FINAL BOSS?!?!?!
+            """
+        else:
+            return """
+            The remnants of the Final SKibidi boss can be seen.
+            Is that a light ahead?
+            """
 class FindTPRoom(LootRoom):
     def __init__(self, x, y):
         super().__init__(x, y, items.ToiletPaper(10))
@@ -229,9 +261,13 @@ class FindPlungerRoom(LootRoom):
         """
 class LeaveSkibidi(MapTile):
     def intro_text(self):
-        return """
-        You have beaten all of the Skibidi's.
-        Now you can return to crusting!
-        """
+        if boss_check == 3:
+            return """
+            It appears you have beaten all the bosses.
+            """
+        else:
+            return """
+            There might be a boss or two out there somewhere.
+            """
     def modify_player(self, player):
         player.victory = True
