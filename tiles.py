@@ -1,7 +1,7 @@
 import items, enemies, actions, world
+from player import Player
 
-
-
+player = Player()
 class MapTile:
     def __init__(self, x, y):
         self.x = x
@@ -43,13 +43,16 @@ class StartingRoom(MapTile):
 class LootRoom(MapTile):
     def __init__(self, x, y, item):
         self.item = item
+        self.looted = False
         super().__init__(x, y)
 
     def add_loot(self, the_player):
         the_player.inventory.append(self.item)
+        self.looted = True
 
     def modify_player(self, the_player):
-        self.add_loot(the_player)
+        if not self.looted:
+            self.add_loot(the_player)
 
 class EnemyRoom(MapTile):
     def __init__(self, x, y, enemy):
@@ -219,55 +222,68 @@ class ThirdBossToiletRoom(EnemyRoom):
             The remnants of the Final SKibidi boss can be seen.
             Is that a light ahead?
             """
-class FindTPRoom(LootRoom):
-    def __init__(self, x, y):
-        super().__init__(x, y, items.ToiletPaper(10))
 
-    def intro_text(self):
-        return """
-        You found some Toilet Paper!
-        """
 class FindCardboardTubeRoom(LootRoom):
     def __init__(self, x, y):
         super().__init__(x, y, items.CardboardTube())
 
     def intro_text(self):
-        return """
-        You found a Cardboard Tube (y'know the thing from the toilet paper roll)!
-        """
+        if not self.looted:
+            return """
+            You found a Cardboard Tube (y'know the thing from the toilet paper roll)!
+            """
+        else:
+            return """
+            The room is now empty.
+            """
 class FindToiletSeatRoom(LootRoom):
     def __init__(self, x, y):
         super().__init__(x, y, items.ToiletSeat())
 
     def intro_text(self):
-        return """
-        You found a Toilet Seat!
-        """
+        if not self.looted:
+            return """
+            You found a Toilet Seat!
+            """
+        else:
+            return """
+            The room is now empty.
+            """
 class FindToiletBrushRoom(LootRoom):
     def __init__(self, x, y):
         super().__init__(x, y, items.ToiletBrush())
 
     def intro_text(self):
-        return """
-        You found a Toilet Brush!
-        """
+        if not self.looted:
+            return """
+            You found a Toilet Brush!
+            """
+        else:
+            return """
+            The room is now empty.
+            """
 class FindPlungerRoom(LootRoom):
     def __init__(self, x, y):
         super().__init__(x, y, items.Plunger())
 
     def intro_text(self):
-        return """
-        You found a Plunger!
-        """
-class LeaveSkibidi(MapTile):
-    def intro_text(self):
-        if boss_check == 3:
+        if not self.looted:
             return """
-            It appears you have beaten all the bosses.
+            You found a Plunger!
             """
         else:
             return """
-            There might be a boss or two out there somewhere.
+            The room is now empty.
             """
+class LeaveSkibidi(MapTile):
+    def intro_text(self):
+        return """ """
     def modify_player(self, player):
-        player.victory = True
+        if player.boss_defeated == 3:
+            print("""
+            It appears you have beaten all the bosses.
+            """)
+            player.victory = True
+        else:
+            print("There might be a boss or two out there somewhere.")
+            return

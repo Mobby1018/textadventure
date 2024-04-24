@@ -1,0 +1,11 @@
+			
+			
+			
+			
+			
+			
+			
+	FindPlungerRoom		
+	FirstBossToiletRoom		
+ThirdBossToiletRoom	StartingRoom	SecondBossToiletRoom	
+	LeaveSkibidi		

@@ -4,6 +4,7 @@ import pickle
 import time
 from os import system, name
 
+
 def clear():
     if name == 'nt':
         _ = system('cls')
@@ -11,13 +12,16 @@ def clear():
         _ = system('clear')
 class Player():
     def __init__(self):
-        self.inventory = [items.ToiletPaper(15),items.Fist()]
-        self.hp = 100
+        self.inventory = [items.Fist()]
+        self.hp = 125
         self.location_x, self.location_y = world.starting_position
         self.victory = False
-
+        self.boss_defeated = 0
     def is_alive(self):
         return self.hp > 0
+
+    def add_to_inventory(self, item):
+        self.inventory.append(item)
 
     def print_inventory(self):
         for item in self.inventory:
@@ -40,6 +44,7 @@ class Player():
     def move_west(self):
         self.move(dx=-1, dy=0)
 
+
     def attack(self, enemy):
         best_weapon = None
         max_dmg = 0
@@ -53,6 +58,18 @@ class Player():
         enemy.hp -= best_weapon.damage
         if not enemy.is_alive():
             print("You killed {}!".format(enemy.name))
+            if enemy.name == "Boss Toilet":
+                self.boss_defeated += 1
+                print("It appears your health got restored as well!")
+                if self.boss_defeated == 1:
+                    self.hp = 125
+                    print("First boss down!")
+                elif self.boss_defeated == 2:
+                    self.hp = 150
+                    print("Another boss down! Just one more to go!")
+                elif self.boss_defeated == 3:
+                    self.hp = 150
+                    print("I think that's all the bosses. Maybe it's time to find an exit.")
         else:
             print("{} HP is {}.".format(enemy.name, enemy.hp))
 

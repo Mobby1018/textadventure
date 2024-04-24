@@ -7,6 +7,7 @@ from os import system, name
 from time import sleep
 import enemies
 import tiles
+
 def SPrint(pause, string):
     for char in string:
         sys.stdout.write(char)
